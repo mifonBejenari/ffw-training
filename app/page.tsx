@@ -2,8 +2,12 @@ import Image from 'next/image'
 import styles from './page.module.css'
 
 export default function Home() {
+  const title = 'Next';
+
+
   return (
     <main className={styles.main}>
+      <h1 className={'page-title'}>Next</h1>
       <div className={styles.description}>
         <p>
           Get started by editing&nbsp;
