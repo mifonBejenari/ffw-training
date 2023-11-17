@@ -10,6 +10,9 @@ export default function Menu() {
         <li>
           <Link href={'/posts'}>{'Posts'}</Link>
         </li>
+        <li>
+          <Link href={'/test'}>{'Test'}</Link>
+        </li>
       </ul>
     </nav>
   );
