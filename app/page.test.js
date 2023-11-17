@@ -1,9 +1,8 @@
 import { render } from '@testing-library/react';
 import Page from './page';
 
-test('CheckSum', () => {
-    const { queryByTestId } = render(
-        <Page />
-    );
-    expect(queryByTestId(/heading/i)).toBeTruthy();
+test('should render component in the page', () => {
+  const page = render(<Page />);
+  // const { getByTestId } = render(<Page />);
+  expect(page.queryByRole('heading')).toBeTruthy();
 });
