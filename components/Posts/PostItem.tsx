@@ -2,10 +2,10 @@ import { PostItem } from '@/lib/types';
 import Link from 'next/link';
 
 export default function PostItem({ post }: { post: PostItem }) {
-  const { id, title, body, userId } = post;
+  const { id, title } = post;
 
   return (
-    <Link href={`posts/${id}`}>
+    <Link href={`/posts/${id}`}>
       <h3>{title}</h3>
     </Link>
   );
