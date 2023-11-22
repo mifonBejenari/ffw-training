@@ -1,4 +1,4 @@
-export default function Posts() {
+export default async function Page() {
   return (
     <main>
       <h1>{'Test'}</h1>

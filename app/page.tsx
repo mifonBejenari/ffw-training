@@ -1,11 +1,11 @@
 import styles from './page.module.css';
-import { getPosts } from '@/lib/data';
+import { get5RandomPosts } from '@/lib/data';
 import PostsList from '@/components/Posts/PostsList';
 
 export const revalidate = 20;
 
 export default async function Home() {
-  const posts = await getPosts();
+  const posts = await get5RandomPosts();
 
   if (!posts) {
     return null;

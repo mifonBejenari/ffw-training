@@ -16,3 +16,21 @@ export type CommentItem = {
 };
 
 export type Comments = CommentItem[];
+
+export type AlbumItem = {
+  userId: number;
+  id: number;
+  title: string;
+};
+
+export type Albums = AlbumItem[];
+
+export type PhotoItem = {
+  albumId: number;
+  id: number;
+  title: string;
+  url: string;
+  thumbnailUrl: string;
+};
+
+export type Photos = PhotoItem[];

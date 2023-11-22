@@ -11,7 +11,7 @@ export default function Menu() {
           <Link href={'/posts'}>{'Posts'}</Link>
         </li>
         <li>
-          <Link href={'/test'}>{'Test'}</Link>
+          <Link href={'/albums'}>{'Albums'}</Link>
         </li>
       </ul>
     </nav>
