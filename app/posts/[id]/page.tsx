@@ -1,6 +1,8 @@
 import { getComments, getPost } from '@/lib/data';
 import CommentItem from '@/components/Comments/CommentItem';
 
+export const revalidate = 20;
+
 export default async function Page({ params }: { params: { id: string } }) {
   const id = params.id;
   const post = await getPost(id);
