@@ -3,6 +3,7 @@ import {
   AlbumItem,
   Albums,
   Comments,
+  PhotoItem,
   Photos,
   PostItem,
   Posts
@@ -66,7 +67,7 @@ export async function getAlbums(): Promise<Albums | undefined> {
   }
 }
 
-export async function getAlbum(id: string): Promise<AlbumItem | undefined> {
+export async function getAlbum(id: number): Promise<AlbumItem | undefined> {
   try {
     const response = await axios.get(
       `https://jsonplaceholder.typicode.com/albums/${id}`
@@ -77,10 +78,21 @@ export async function getAlbum(id: string): Promise<AlbumItem | undefined> {
   }
 }
 
-export async function getPhotos(id: string): Promise<Photos | undefined> {
+export async function getPhotos(id: number): Promise<Photos | undefined> {
   try {
     const response = await axios.get(
       `https://jsonplaceholder.typicode.com/albums/${id}/photos`
+    );
+    return response.data;
+  } catch (error) {
+    // console.error(error);
+  }
+}
+
+export async function getPhotoItem(id: string): Promise<PhotoItem | undefined> {
+  try {
+    const response = await axios.get(
+      `https://jsonplaceholder.typicode.com/photos/${id}`
     );
     return response.data;
   } catch (error) {

@@ -21,6 +21,7 @@ export type AlbumItem = {
   userId: number;
   id: number;
   title: string;
+  photos?: Photos;
 };
 
 export type Albums = AlbumItem[];
