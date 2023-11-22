@@ -6,7 +6,10 @@ export async function getPosts(): Promise<Posts | undefined> {
     const response = await axios.get(
       'https://jsonplaceholder.typicode.com/posts'
     );
-    return response.data;
+    const posts = response.data;
+    const shuffled = posts.sort(() => 0.5 - Math.random());
+    let selected = shuffled.slice(0, 5);
+    return selected;
   } catch (error) {
     console.error(error);
   }
