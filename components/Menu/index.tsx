@@ -13,6 +13,9 @@ export default function Menu() {
         <li>
           <Link href={'/albums'}>{'Albums'}</Link>
         </li>
+        <li>
+          <Link href={'/users'}>{'Users'}</Link>
+        </li>
       </ul>
     </nav>
   );

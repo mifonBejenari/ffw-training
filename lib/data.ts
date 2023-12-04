@@ -6,7 +6,9 @@ import {
   PhotoItem,
   Photos,
   PostItem,
-  Posts
+  Posts,
+  UserItem,
+  Users
 } from '@/lib/types';
 
 export async function getPosts(): Promise<Posts | undefined> {
@@ -93,6 +95,39 @@ export async function getPhotoItem(id: string): Promise<PhotoItem | undefined> {
   try {
     const response = await axios.get(
       `https://jsonplaceholder.typicode.com/photos/${id}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function getUsers(): Promise<Users | undefined> {
+  try {
+    const response = await axios.get(
+      `https://jsonplaceholder.typicode.com/users`
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function getUser(id: number): Promise<UserItem | undefined> {
+  try {
+    const response = await axios.get(
+      `https://jsonplaceholder.typicode.com/users/${id}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function getPostsByUser(id: number): Promise<Posts | undefined> {
+  try {
+    const response = await axios.get(
+      `https://jsonplaceholder.typicode.com/users/${id}/posts`
     );
     return response.data;
   } catch (error) {

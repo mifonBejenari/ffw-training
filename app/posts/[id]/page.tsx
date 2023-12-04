@@ -1,5 +1,6 @@
-import { getComments, getPost } from '@/lib/data';
+import { getComments, getPost, getUser } from '@/lib/data';
 import CommentItem from '@/components/Comments/CommentItem';
+import Link from 'next/link';
 
 export const revalidate = 20;
 
@@ -14,10 +15,16 @@ export default async function Page({ params }: { params: { id: string } }) {
   const comments = await getComments(id);
 
   const { title, body } = post;
+  const user = await getUser(post.userId);
 
   return (
     <>
       <h1>{title}</h1>
+
+      {user && (
+        <h3>By: {<Link href={`/users/${user.id}`}>{user.name}</Link>}</h3>
+      )}
+
       <div>{body}</div>
 
       {comments && (
