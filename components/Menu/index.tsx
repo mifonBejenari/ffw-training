@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import ProfileButton from './ProfileButton';
 
 export default function Menu() {
   return (
@@ -15,6 +16,9 @@ export default function Menu() {
         </li>
         <li>
           <Link href={'/users'}>{'Users'}</Link>
+        </li>
+        <li>
+          <ProfileButton />
         </li>
       </ul>
     </nav>
