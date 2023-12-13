@@ -61,3 +61,8 @@ export type UserItem = {
 };
 
 export type Users = UserItem[];
+
+export type SessionData = {
+  userId: number;
+  isLoggedIn: boolean;
+};
