@@ -4,7 +4,7 @@ export default function Logo() {
   return (
     <Link href="/">
       <Image
-        src={'FFW_Logo-white.svg'}
+        src={'/FFW_Logo-white.svg'}
         alt={'FFW Logo'}
         width={150}
         height={111}

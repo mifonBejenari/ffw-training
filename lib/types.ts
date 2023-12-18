@@ -66,3 +66,8 @@ export type SessionData = {
   userId: number;
   isLoggedIn: boolean;
 };
+
+export type MenuItem = {
+  url: string;
+  label: string;
+};

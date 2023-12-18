@@ -1,7 +1,10 @@
 import { getPostsByUser, getUser } from '@/lib/data';
 import Link from 'next/link';
+import { getSession } from '@/lib/actions';
+import { redirect } from 'next/navigation';
 
 export default async function Page({ params }: { params: { id: number } }) {
+  const session = await getSession();
   const id = params.id;
   const user = await getUser(id);
   const posts = await getPostsByUser(id);
@@ -11,6 +14,10 @@ export default async function Page({ params }: { params: { id: number } }) {
   }
   if (!posts) {
     return;
+  }
+
+  if (session && session.userId == id) {
+    redirect('/user/profile');
   }
 
   return (

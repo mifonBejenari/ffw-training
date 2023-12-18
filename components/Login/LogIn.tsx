@@ -1,6 +1,6 @@
-import { login } from '@/lib/userAuthentication';
+import { login } from '@/lib/actions';
 
-export default function LogIn() {
+export default async function LogIn() {
   return (
     <form action={login}>
       <label form="email">Email:</label>

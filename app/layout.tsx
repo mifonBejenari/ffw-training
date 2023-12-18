@@ -11,7 +11,7 @@ export const metadata = {
   description: 'Created manually for Dude'
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children
 }: {
   children: React.ReactNode;

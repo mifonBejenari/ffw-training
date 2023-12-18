@@ -11,8 +11,14 @@ const nextConfig = {
       }
     ]
   },
-  experimental: {
-    serverActions: true
+  async redirects() {
+    return [
+      {
+        source: '/user',
+        destination: '/user/profile',
+        permanent: true
+      }
+    ];
   }
 };
 

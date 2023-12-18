@@ -1,10 +1,10 @@
 import Log from '@/components/Login/Log';
-import { getSession } from '@/lib/userAuthentication';
+import { getSession } from '@/lib/actions';
 import { redirect } from 'next/navigation';
 export default async function Page() {
   const session = await getSession();
 
-  if (session.isLoggedIn) {
+  if (session?.isLoggedIn) {
     redirect('/user/profile');
   }
 

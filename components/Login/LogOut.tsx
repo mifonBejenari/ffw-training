@@ -1,10 +1,12 @@
-import { logout } from '@/lib/userAuthentication';
+import { logout } from '@/lib/actions';
 
-export default function LogOut() {
+export default async function LogOut() {
   return (
     <form action={logout}>
       <div>
-        <button value="Logout">Logout</button>
+        <button value="Logout" type={'submit'}>
+          Logout
+        </button>
       </div>
     </form>
   );

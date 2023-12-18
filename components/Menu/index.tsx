@@ -1,25 +1,43 @@
 import Link from 'next/link';
-import ProfileButton from './ProfileButton';
+import { getSession, logout } from '@/lib/actions';
+import { mainMenu, userMenu, userLogin } from './menuData';
 
-export default function Menu() {
+export default async function Menu() {
+  const session = await getSession();
+
   return (
     <nav>
       <ul className={'menu'}>
-        <li>
-          <Link href={'/'}>{'Home'}</Link>
-        </li>
-        <li>
-          <Link href={'/posts'}>{'Posts'}</Link>
-        </li>
-        <li>
-          <Link href={'/albums'}>{'Albums'}</Link>
-        </li>
-        <li>
-          <Link href={'/users'}>{'Users'}</Link>
-        </li>
-        <li>
-          <ProfileButton />
-        </li>
+        {mainMenu.map((item) => (
+          <li key={`menu-item-${item.url}`}>
+            <Link href={item.url}>{item.label}</Link>
+          </li>
+        ))}
+        {session?.isLoggedIn
+          ? userMenu.map((item) => (
+              <li key={`menu-item-${item.url}`}>
+                <Link href={item.url}>{item.label}</Link>
+              </li>
+            ))
+          : userLogin.map((item) => (
+              <li key={`menu-item-${item.url}`}>
+                <Link href={item.url}>{item.label}</Link>
+              </li>
+            ))}
+        {/*<li>*/}
+        {/*  <Link href={`/user/${session.isLoggedIn ? 'profile' : 'login'}`}>*/}
+        {/*    {session.isLoggedIn ? 'Profile' : 'Login'}*/}
+        {/*  </Link>*/}
+        {/*</li>*/}
+        {/*{session.isLoggedIn && (*/}
+        {/*  <li>*/}
+        {/*    <form action={logout}>*/}
+        {/*      <div>*/}
+        {/*        <button value="Logout">Logout</button>*/}
+        {/*      </div>*/}
+        {/*    </form>*/}
+        {/*  </li>*/}
+        {/*)}*/}
       </ul>
     </nav>
   );

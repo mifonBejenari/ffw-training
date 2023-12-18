@@ -1,12 +1,14 @@
-import { SessionData } from './types';
-import { defaultSession, sessionOptions } from './session';
-import { getIronSession, IronSession } from 'iron-session';
-import { cookies } from 'next/headers';
-// import { revalidatePath } from 'next/cache';
+'use server';
+import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { getUsers } from './data';
+import { getIronSession } from 'iron-session';
+import { SessionData } from '@/lib/types';
+import { cookies } from 'next/headers';
+import { defaultSession, sessionOptions } from './session';
+import { getUsers } from '@/lib/data';
 
 export async function getSession() {
+  'use server';
   const session = await getIronSession<SessionData>(cookies(), sessionOptions);
 
   if (!session.isLoggedIn) {
@@ -14,15 +16,36 @@ export async function getSession() {
     session.userId = defaultSession.userId;
   }
 
+  revalidatePath('/');
+
   return session;
 }
 
 export async function logout() {
   'use server';
-
   const session = await getSession();
   session.destroy();
-  redirect('/user/login');
+
+  revalidatePath('/');
+  redirect('/');
+}
+
+export async function login(formData: FormData) {
+  'use server';
+  const session = await getSession();
+
+  const user = await getCurrentUserData(
+    formData.get('email') as string,
+    formData.get('password') as string
+  );
+
+  if (user) {
+    session.userId = user.id;
+    session.isLoggedIn = true;
+    await session.save();
+    revalidatePath('/');
+    redirect('/user/profile');
+  }
 }
 
 export async function getCurrentUserData(email: string, password: string) {
@@ -32,26 +55,7 @@ export async function getCurrentUserData(email: string, password: string) {
     currentUser = users.filter((userItem) => userItem.email === email);
   }
 
-  if (password === 'qwerty') {
+  if (password === 'qwe') {
     return currentUser?.[0];
-  }
-}
-
-export async function login(formData: FormData) {
-  'use server';
-
-  const user = await getCurrentUserData(
-    formData.get('email') as string,
-    formData.get('password') as string
-  );
-
-  console.log('user', user);
-  if (user) {
-    const session = await getSession();
-
-    session.userId = user.id;
-    session.isLoggedIn = true;
-    await session.save();
-    redirect('/user/profile');
   }
 }
