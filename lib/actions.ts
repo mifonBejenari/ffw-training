@@ -14,6 +14,7 @@ export async function getSession() {
   if (!session.isLoggedIn) {
     session.isLoggedIn = defaultSession.isLoggedIn;
     session.userId = defaultSession.userId;
+    session.theme = defaultSession.theme;
   }
 
   revalidatePath('/');
@@ -58,4 +59,10 @@ export async function getCurrentUserData(email: string, password: string) {
   if (password === 'qwe') {
     return currentUser?.[0];
   }
+}
+
+export async function saveSettings(formData: FormData) {
+  const session = await getSession();
+  session.theme = formData.get('theme') as string;
+  await session.save();
 }

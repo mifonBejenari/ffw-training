@@ -1,8 +1,10 @@
+'use server';
 import { getSession } from '@/lib/actions';
 import { getPostsByUser, getUser } from '@/lib/data';
 import { redirect } from 'next/navigation';
 import PostsList from '@/components/Posts/PostsList';
 import ThemeSelector from '@/components/ThemeSelector/ThemeSelector';
+import { saveSettings } from '@/lib/actions';
 export default async function Page() {
   const session = await getSession();
 
@@ -18,7 +20,10 @@ export default async function Page() {
       <h1>{`Hi, ${user.name}`}</h1>
       <h3>{user.email}</h3>
       <h3>{user.username}</h3>
-      <ThemeSelector />
+      <ThemeSelector
+        saveSettings={saveSettings}
+        themeState={session.theme ? session.theme : 'auto'}
+      />
       {userPosts && <PostsList posts={userPosts} />}
     </div>
   );

@@ -2,7 +2,8 @@ import { SessionOptions } from 'iron-session';
 import { SessionData } from './types';
 export const defaultSession: SessionData = {
   userId: 0,
-  isLoggedIn: false
+  isLoggedIn: false,
+  theme: ''
 };
 
 export const sessionOptions: SessionOptions = {

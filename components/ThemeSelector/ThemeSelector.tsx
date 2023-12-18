@@ -1,9 +1,15 @@
 import Buttons from './buttons';
-export default async function ThemeSelector() {
+export default async function ThemeSelector({
+  saveSettings,
+  themeState
+}: {
+  saveSettings: any;
+  themeState: string;
+}) {
   return (
-    <form>
+    <form action={saveSettings}>
       <p>{'Dark Mode'}</p>
-      <Buttons />
+      <Buttons themeState={themeState} />
       <input type={'submit'} value={'Save'} />
     </form>
   );
