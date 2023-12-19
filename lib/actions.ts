@@ -5,7 +5,7 @@ import { getIronSession } from 'iron-session';
 import { SessionData } from '@/lib/types';
 import { cookies } from 'next/headers';
 import { defaultSession, sessionOptions } from './session';
-import { getUsers } from '@/lib/data';
+import axios from 'axios';
 
 export async function getSession() {
   'use server';
@@ -49,15 +49,21 @@ export async function login(formData: FormData) {
   }
 }
 
-export async function getCurrentUserData(email: string, password: string) {
-  const users = await getUsers();
-  let currentUser;
-  if (users) {
-    currentUser = users.filter((userItem) => userItem.email === email);
+export async function getUserByMail({ email }: { email: string }) {
+  try {
+    const response = await axios.get(
+      `https://jsonplaceholder.typicode.com/users?email=${email}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
   }
+}
 
-  if (password === 'qwe') {
-    return currentUser?.[0];
+export async function getCurrentUserData(email: string, password: string) {
+  const user = await getUserByMail({ email });
+  if (user && password === 'qwe') {
+    return user[0];
   }
 }
 
